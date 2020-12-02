@@ -1,0 +1,48 @@
+<div id="blog-<%= blog.id %>" class="container text-center">
+    <h3><%= blog.title %></h3> &nbsp;&nbsp;
+    <button class="btn btn-primary" onclick="editBlog(<%= blog.id %>)">Edit</button>
+    <p><%= blog.content %></p>
+    <br>
+    <a href="blog/delete/<%= blog.id %>">Delete</a>
+</div>
+
+<div id="update-form-<%= blog.id %>">
+    <div style="margin: 100px">
+        <form method="post" action="blog/update/<%=blog.id%>">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="form-group">
+                            <input class="form-control" id="title" name="title" placeholder="Title" type="text"
+                                   value="<%= blog.title %>" required>
+                        </div>
+                    </div>
+                    <textarea class="form-control" id="content" name="content" placeholder="Content" required
+                              rows="5"><%=blog.content%></textarea>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <button class="btn pull-right" onclick="updateBlog(<%=blog.id%>)" type="submit">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#update-form-<%= blog.id %>").hide();
+    });
+
+    function editBlog(blogId) {
+        $("#update-form-" + blogId).show();
+        $("#blog-" + blogId).hide();
+    }
+
+    function updateBlog(blogId) {
+        $("#update-form-" + blogId).hide();
+        $("#blog-" + blogId).show();
+    }
+</script>
